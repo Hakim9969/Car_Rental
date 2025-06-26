@@ -1,0 +1,66 @@
+### Register User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "hakimyakim200@gmail.com",
+  "name": "Abdul Hak Ahmed",
+  "phone": "+254745115061",
+  "password": "hakim200",
+  "confirmPassword": "hakim200",
+  "role": "ADMIN"
+}
+
+### Login Admin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "hakimyakim200@gmail.com",
+  "password": "hakim200"
+}
+
+### Register Agent
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "hakgotchills@gmail.com",
+  "name": "Hakim Yakim",
+  "phone": "+254745115058",
+  "password": "hakim200",
+  "confirmPassword": "hakim200",
+  "role": "AGENT"
+}
+
+### Login Agent
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "hakgotchills@gmail.com",
+  "password": "hakim200"
+}
+
+### Register Customer
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "justhakimm@gmail.com",
+  "name": "Riadh Ahmed",
+  "phone": "+254745115051",
+  "password": "hakim200",
+  "confirmPassword": "hakim200",
+  "role": "CUSTOMER"
+}
+
+### Login Customer
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "justhakimm@gmail.com",
+  "password": "hakim200"
+}
+
