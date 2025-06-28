@@ -1,0 +1,72 @@
+@ADMIN_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZjY3NTRmZC04YzdlLTQ4ZDUtYWU0MC1mZWQxOTUyZmY1YjEiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxMDI2MjAzLCJleHAiOjE3NTExMTI2MDN9.qhk-1fr-r5cYR9N2FWiCByisAT88F7Iuhs6-ZNw_4kY
+@AGENT_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MjMwM2Y4Ni02MDJkLTQ1NjMtYWJlOC05ZjBjYzJiODVkYWIiLCJlbWFpbCI6Imhha2dvdGNoaWxsc0BnbWFpbC5jb20iLCJyb2xlIjoiQUdFTlQiLCJpYXQiOjE3NTEwMjYyNzUsImV4cCI6MTc1MTExMjY3NX0.63HFchM2Lq-1NDIQWsai5u_FkSFkgzPCpbYQHpw5sZ0
+@CUSTOMER_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNTEyN2Q4Ny03ZWIzLTRlOWYtYjg4NC03NjljMWIxMmE3ZWEiLCJlbWFpbCI6Imp1c3RoYWtpbW1AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUxMDI2MzEyLCJleHAiOjE3NTExMTI3MTJ9.XBfiy6B5K1r40KKSfCvSdvZZjjoQduJXd_sf-UQ4tqY
+
+### 👤 Get Logged-in User Profile (as Admin)
+GET http://localhost:3000/user/me
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+### 👤 Get Logged-in User Profile (as Agent)
+GET http://localhost:3000/user/me
+Authorization: Bearer {{AGENT_TOKEN}}
+
+### 👤 Get Logged-in User Profile (as Customer)
+GET http://localhost:3000/user/me
+Authorization: Bearer {{CUSTOMER_TOKEN}}
+
+
+### Request token
+POST http://localhost:3000/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "justhakimm@gmail.com"
+}
+
+
+### Reset Password with Token
+POST http://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+  "token": "13ca7a8f9e5ff1f6c86940ac15233d54a2af04843d7920da4f4688eb6e790757",
+  "newPassword": "hakim200",
+  "confirmPassword": "hakim200"
+}
+
+
+### 📊 Get System Stats (Admin only)
+GET http://localhost:3000/user/stats
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+
+### 👥 All users
+GET http://localhost:3000/user/all
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+### 👥 Filter by role
+GET http://localhost:3000/user/all?role=AGENT
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+### 👥 Filter by date range
+GET http://localhost:3000/user/all?startDate=2025-06-01&endDate=2025-06-30
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+### 🔍 Search by name/email
+GET http://localhost:3000/user/all?search=abdul
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+
+### Create a Review
+POST http://localhost:3000/reviews
+Content-Type: application/json
+Authorization: Bearer {{CUSTOMER_TOKEN}}
+
+{
+  "vehicleId": "cb9db4ac-182a-4ace-bf24-86ceac5a4e38",
+  "rating": 5,
+  "comment": "Amazing ride! Smooth and clean."
+}
+
+### Get Reviews for a Vehicle
+GET http://localhost:3000/reviews/vehicle/cb9db4ac-182a-4ace-bf24-86ceac5a4e38

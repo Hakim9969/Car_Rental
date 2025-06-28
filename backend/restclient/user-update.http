@@ -1,9 +1,0 @@
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNTEyN2Q4Ny03ZWIzLTRlOWYtYjg4NC03NjljMWIxMmE3ZWEiLCJlbWFpbCI6Imp1c3RoYWtpbW1AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUwOTM4ODM2LCJleHAiOjE3NTEwMjUyMzZ9.o6HzKAbP95DtbXMLEQgVuhWFFt77O_Bp4-5iC8HGrMc
-### 📝 Update Profile
-PATCH http://localhost:3000/user/me
-Authorization: Bearer {{TOKEN}}
-Content-Type: application/json
-
-{
-  "phone": "+254745115052"
-}
