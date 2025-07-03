@@ -60,11 +60,13 @@ export class UserService {
 
  
  async getSystemStats(): Promise<SystemStatsDto> {
-  const [totalUsers, admins, agents, customers] = await Promise.all([
+  const [totalUsers, admins, agents, customers, totalBookings, totalVehicles] = await Promise.all([
     this.prisma.user.count(),
     this.prisma.user.count({ where: { role: 'ADMIN' } }),
     this.prisma.user.count({ where: { role: 'AGENT' } }),
     this.prisma.user.count({ where: { role: 'CUSTOMER' } }),
+    this.prisma.booking.count(),
+    this.prisma.vehicle.count(),
   ]);
 
   const activeRentals = await this.prisma.booking.count({
@@ -84,10 +86,13 @@ export class UserService {
     admins,
     agents,
     customers,
+    totalBookings,
+    totalVehicles,
     activeRentals,
     totalRevenue: revenueAgg._sum.totalPrice ?? 0,
   };
  }
+
 
  async filterUsers(dto: FilterUsersDto) {
   const { role, startDate, endDate, search } = dto;

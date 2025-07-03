@@ -1,0 +1,21 @@
+<h2>System Statistics</h2>
+
+<div *ngIf="loading" class="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!loading && !error" class="stats-container">
+  <div class="stat-card clickable" (click)="goTo('users')">
+    <h3>Total Users</h3>
+    <p>{{ totalUsers }}</p>
+  </div>
+
+  <div class="stat-card clickable" (click)="goTo('manage-vehicles')">
+    <h3>Total Vehicles</h3>
+    <p>{{ totalVehicles }}</p>
+  </div>
+
+  <div class="stat-card clickable" (click)="goTo('bookings')">
+    <h3>Total Bookings</h3>
+    <p>{{ totalBookings }}</p>
+  </div>
+</div>

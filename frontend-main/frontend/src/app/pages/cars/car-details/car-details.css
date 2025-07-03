@@ -1,0 +1,499 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #ffffff;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Modern background with subtle pattern */
+.cars-section {
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 24px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cars-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: -1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.detailsBooking {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.content-wrapper {
+  position: relative;
+}
+
+/* Modern card with subtle shadows */
+.car-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.car-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+  background-size: 300% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.car-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Image section with modern overlay */
+.car-image-container {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.car-image:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2) contrast(1.2);
+}
+
+/* Floating gradient overlay on image */
+.car-image-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Car details section */
+.car-details {
+  padding: 2rem;
+}
+
+.car-title {
+  font-size: 2.25rem;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Modern detail rows with subtle styling */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+  transition: left 0.5s;
+}
+
+.detail-row:hover::before {
+  left: 100%;
+}
+
+.detail-row:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.detail-value {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Full width detail rows */
+.detail-row.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Reviews section */
+.car-actions {
+  padding: 2rem;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.car-actions h3 {
+  font-size: 1.75rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.car-actions ul {
+  list-style: none;
+}
+
+.car-actions li {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #475569;
+  border-left: 4px solid #4ecdc4;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.car-actions p {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Booking form with modern styling */
+.booking-form-container,
+.review-form-container {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
+}
+
+.booking-form-container {
+  position: sticky;
+  top: 2rem;
+}
+
+.booking-form-container h3,
+.review-form-container h3 {
+  color: #1e293b;
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  color: #374151;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4ecdc4;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+  background: #ffffff;
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Modern buttons with gradients and animations */
+.info-button,
+.book-button,
+.cancel-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.info-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.book-button {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.cancel-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.info-button:hover,
+.book-button:hover,
+.cancel-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Button ripple effect */
+.info-button::before,
+.book-button::before,
+.cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.info-button:active::before,
+.book-button:active::before,
+.cancel-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Messages */
+.booking-message {
+  text-align: center;
+  font-weight: 500;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.success {
+  color: #059669;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.error {
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.error-message {
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.25rem;
+  padding: 3rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .detailsBooking {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .booking-form-container {
+    position: static;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cars-section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .car-details,
+  .booking-form-container,
+  .review-form-container {
+    padding: 1.5rem;
+  }
+  
+  .car-image-container {
+    height: 250px;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .car-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Floating particles animation - subtle for white background */
+.cars-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4ecdc4, #44a08d);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #44a08d, #4ecdc4);
+}

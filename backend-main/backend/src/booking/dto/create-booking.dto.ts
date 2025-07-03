@@ -1,6 +1,7 @@
 import {
   IsString,
   IsDateString,
+  IsNotEmpty,
 } from 'class-validator';
 
 export class CreateBookingDto {
@@ -12,4 +13,8 @@ export class CreateBookingDto {
 
   @IsDateString()
   endDate: string;
+
+  @IsString()
+  @IsNotEmpty()
+  location: string; 
 }

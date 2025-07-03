@@ -8,9 +8,10 @@ import { BookingModule } from './booking/booking.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
 import { ReviewsModule } from './reviews/reviews.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
-  imports: [ScheduleModule.forRoot(), AuthModule, UserModule, VehicleModule, BookingModule, ConfigModule.forRoot({ isGlobal: true }), ReviewsModule],
+  imports: [ScheduleModule.forRoot(), AuthModule, UserModule, VehicleModule, BookingModule, ConfigModule.forRoot({ isGlobal: true }), ReviewsModule, CloudinaryModule],
   controllers: [AppController],
   providers: [AppService],
 })

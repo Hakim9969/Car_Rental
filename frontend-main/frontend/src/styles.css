@@ -1,0 +1,26 @@
+nav.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ccc;
+  justify-content: end;
+}
+
+nav.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+nav.navbar a.active {
+  color: #007BFF;
+  border-bottom: 2px solid #007BFF;
+}
+
+body.customer-dashboard-page nav.navbar {
+  background: transparent !important;
+  color: white !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}

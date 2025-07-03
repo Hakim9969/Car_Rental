@@ -14,22 +14,40 @@ export class VehicleService {
   }
 
   async getAllVehicles(filter?: FilterVehicleDto): Promise<Vehicle[]> {
-  const { category, brand, available, minPrice, maxPrice, startDate, endDate } = filter || {};
+  const { category, brand, available, minPrice, maxPrice, startDate, endDate,location, search } = filter || {};
 
   const vehicles = await this.prisma.vehicle.findMany({
     where: {
-      category: category || undefined,
-      brand: brand || undefined,
-      available: available !== undefined ? available === 'true' : undefined,
-      pricePerDay: {
-        gte: minPrice ? parseFloat(minPrice) : undefined,
-        lte: maxPrice ? parseFloat(maxPrice) : undefined,
-      },
-    },
-    include: {
-      bookings: {
-        where: startDate && endDate
-          ? {
+    AND: [
+      category ? { category: { contains: category, mode: 'insensitive' } } : {},
+      brand ? { brand: { contains: brand, mode: 'insensitive' } } : {},
+      location ? { location: { contains: location, mode: 'insensitive' } } : {},
+      available !== undefined ? { available: available === 'true' } : {},
+      minPrice || maxPrice
+        ? {
+            pricePerDay: {
+              gte: minPrice ? parseFloat(minPrice) : undefined,
+              lte: maxPrice ? parseFloat(maxPrice) : undefined,
+            },
+          }
+        : {},
+      search
+        ? {
+            OR: [
+              { title: { contains: search, mode: 'insensitive' } },
+              { brand: { contains: search, mode: 'insensitive' } },
+              { category: { contains: search, mode: 'insensitive' } },
+              { location: { contains: search, mode: 'insensitive' } },
+            ],
+          }
+        : {},
+    ],
+  },
+  include: {
+    bookings:
+      startDate && endDate
+        ? {
+            where: {
               OR: [
                 {
                   startDate: { lte: new Date(endDate) },
@@ -37,11 +55,12 @@ export class VehicleService {
                 },
               ],
               status: { in: ['PENDING', 'CONFIRMED'] },
-            }
-          : undefined,
-      },
-    },
-  });
+            },
+          }
+        : undefined,
+  },
+});
+
 
   // Exclude vehicles with overlapping bookings
   if (startDate && endDate) {
@@ -75,5 +94,20 @@ export class VehicleService {
 
   return { message: 'Vehicle deleted successfully' };
  }
+
+  async getAllLocations(): Promise<string[]> {
+  const locations = await this.prisma.vehicle.findMany({
+    select: { location: true },
+    distinct: ['location'],
+  });
+
+  // Filter out null or empty strings manually
+  return locations
+    .map((l) => l.location)
+    .filter((loc): loc is string => !!loc && loc.trim() !== '');
+}
+
+
+
 
 }

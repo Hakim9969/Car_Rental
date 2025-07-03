@@ -40,7 +40,11 @@ export class MailService {
       },
     };
 
-    this.transporter = nodemailer.createTransport(smtpConfig);
+    this.transporter = nodemailer.createTransport(smtpConfig, {
+  logger: true,
+  debug: true,
+});
+
     this.logger.log('Mailer transporter initialized');
   }
 
@@ -75,4 +79,41 @@ export class MailService {
 
     return ejs.renderFile(templatePath, context, { async: true });
   }
+
+  async sendWelcomeEmailToUser({ name, email }: { name: string; email: string }) {
+  await this.sendEmail({
+    to: email,
+    subject: 'Welcome to Our Car Rental Platform!',
+    template: 'welcome-user', // e.g. views/welcome-user.hbs or .ejs
+    context: {
+      name,
+    },
+  });
+}
+
+  async sendAdminOnUserRegister(user: {
+  name: string;
+  email: string;
+  role: string;
+  phone?: string;
+}) {
+  const adminEmail = this.configService.get<string>('ADMIN_EMAIL');
+  if (!adminEmail) {
+    this.logger.warn('Admin email not configured');
+    return;
+  }
+
+  await this.sendEmail({
+    to: adminEmail,
+    subject: 'New User Registration',
+    template: 'admin-user-registered',
+    context: {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      phone: user.phone || 'N/A',
+    },
+  });
+}
+
 }

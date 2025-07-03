@@ -1,16 +1,16 @@
-@ADMIN_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZjY3NTRmZC04YzdlLTQ4ZDUtYWU0MC1mZWQxOTUyZmY1YjEiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxMDI2MjAzLCJleHAiOjE3NTExMTI2MDN9.qhk-1fr-r5cYR9N2FWiCByisAT88F7Iuhs6-ZNw_4kY
+@ADMIN_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZGU1Yzc0Ni05MGJmLTQ3MDUtYTI3Yi1iOWI3MDE2OTE3ZDUiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxNDQ2MjU1LCJleHAiOjE3NTE1MzI2NTV9.NmLhBHNiW0Sun5oCXCDH6J7h5hoXg2QkZUJivqPhM4M
 @AGENT_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MjMwM2Y4Ni02MDJkLTQ1NjMtYWJlOC05ZjBjYzJiODVkYWIiLCJlbWFpbCI6Imhha2dvdGNoaWxsc0BnbWFpbC5jb20iLCJyb2xlIjoiQUdFTlQiLCJpYXQiOjE3NTEwMjYyNzUsImV4cCI6MTc1MTExMjY3NX0.63HFchM2Lq-1NDIQWsai5u_FkSFkgzPCpbYQHpw5sZ0
-@CUSTOMER_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNTEyN2Q4Ny03ZWIzLTRlOWYtYjg4NC03NjljMWIxMmE3ZWEiLCJlbWFpbCI6Imp1c3RoYWtpbW1AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUxMDI2MzEyLCJleHAiOjE3NTExMTI3MTJ9.XBfiy6B5K1r40KKSfCvSdvZZjjoQduJXd_sf-UQ4tqY
-
+@CUSTOMER_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZGU1Yzc0Ni05MGJmLTQ3MDUtYTI3Yi1iOWI3MDE2OTE3ZDUiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUxMjcxNDkxLCJleHAiOjE3NTEzNTc4OTF9.37ImrBXEbosjg_xD7SxdjFNlfG1YCBKLuel-N6ya7f8
 ### ✅ Create Booking
 POST http://localhost:3000/booking
 Authorization: Bearer {{CUSTOMER_TOKEN}}
 Content-Type: application/json
 
 {
-  "vehicleId": "cb9db4ac-182a-4ace-bf24-86ceac5a4e38",
-  "startDate": "2025-10-05",
-  "endDate": "2025-07-10"
+  "vehicleId": "050e82f1-aa07-4d0e-b8ea-76d9bafaad77",
+  "startDate": "2025-7-11",
+  "endDate": "2025-07-12",
+  "location": "Nairobi"
 }
 
 ### 📄 Get My Bookings
@@ -18,13 +18,23 @@ GET http://localhost:3000/booking/me
 Authorization: Bearer {{CUSTOMER_TOKEN}}
 
 ### 🔁 Approve Booking
-PATCH http://localhost:3000/booking/da05f3ef-a551-4523-96f2-ac15abb53bac/status
+PATCH http://localhost:3000/booking/db77e68f-afca-4d1f-a456-78efacb9ca83/status
 Authorization: Bearer {{ADMIN_TOKEN}}
 Content-Type: application/json
 
 {
   "status": "CONFIRMED"
 }
+
+### Update Booking Status to Completed
+PATCH http://localhost:3000/booking/db77e68f-afca-4d1f-a456-78efacb9ca83/status
+Content-Type: application/json
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+{
+  "status": "COMPLETED"
+}
+
 
 ### ❌ Reject Booking
 PATCH http://localhost:3000/booking/816c5914-b2da-4c72-84e5-d490a21a7398/status
@@ -44,7 +54,6 @@ Authorization: Bearer {{CUSTOMER_TOKEN}}
 GET http://localhost:3000/booking/a70cac1c-07d3-4355-8094-642ed02430d7/invoice
 Authorization: Bearer {{CUSTOMER_TOKEN}}
 
-@TOKEN = admin_or_agent_token
 
 ### 🔍 All bookings
 GET http://localhost:3000/booking

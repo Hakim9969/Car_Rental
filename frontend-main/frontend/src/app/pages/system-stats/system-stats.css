@@ -1,0 +1,52 @@
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.stat-card {
+  background-color: #f0f0f0;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-width: 180px;
+  text-align: center;
+}
+
+.stat-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.stat-card p {
+  font-size: 24px;
+  font-weight: bold;
+}

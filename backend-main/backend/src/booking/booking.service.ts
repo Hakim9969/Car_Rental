@@ -14,12 +14,16 @@ export class BookingService {
     constructor(private readonly prisma: PrismaService) {}
 
   async createBooking(userId: string, dto: CreateBookingDto): Promise<Booking> {
-    const { vehicleId, startDate, endDate } = dto;
+    const { vehicleId, startDate, endDate, location } = dto;
 
     // Check if vehicle exists
     const vehicle = await this.prisma.vehicle.findUnique({ where: { id: vehicleId } });
     if (!vehicle) throw new NotFoundException('Vehicle not found');
 
+    if (vehicle.location?.toLowerCase() !== location?.toLowerCase()) {
+    throw new BadRequestException('Selected location does not match vehicle location');
+  }
+  
     // Check for overlapping bookings
     const overlapping = await this.prisma.booking.findFirst({
       where: {
@@ -42,6 +46,7 @@ export class BookingService {
         vehicleId,
         startDate: new Date(startDate),
         endDate: new Date(endDate),
+        location,
         status: 'PENDING',
          },
     });
@@ -57,19 +62,33 @@ export class BookingService {
     });
    }
 
+
    async updateBookingStatus(id: string, dto: UpdateBookingStatusDto) {
   const booking = await this.prisma.booking.findUnique({ where: { id } });
   if (!booking) throw new NotFoundException('Booking not found');
 
-  if (booking.status !== 'PENDING') {
-    throw new BadRequestException('Only pending bookings can be updated');
+  const currentStatus = booking.status;
+  const newStatus = dto.status;
+
+  // Allowed transitions
+  if (newStatus === 'CONFIRMED' && currentStatus !== 'PENDING') {
+    throw new BadRequestException('Only PENDING bookings can be confirmed');
+  }
+
+  if (newStatus === 'COMPLETED' && currentStatus !== 'CONFIRMED') {
+    throw new BadRequestException('Only CONFIRMED bookings can be marked as COMPLETED');
+  }
+
+  if (newStatus === 'REJECTED' && currentStatus !== 'PENDING') {
+    throw new BadRequestException('Only PENDING bookings can be rejected');
   }
 
   return this.prisma.booking.update({
     where: { id },
-    data: { status: dto.status },
+    data: { status: newStatus },
   });
- }
+}
+
 
  async cancelBooking(userId: string, bookingId: string) {
   const booking = await this.prisma.booking.findUnique({

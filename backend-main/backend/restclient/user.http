@@ -1,7 +1,6 @@
-@ADMIN_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZjY3NTRmZC04YzdlLTQ4ZDUtYWU0MC1mZWQxOTUyZmY1YjEiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxMDI2MjAzLCJleHAiOjE3NTExMTI2MDN9.qhk-1fr-r5cYR9N2FWiCByisAT88F7Iuhs6-ZNw_4kY
+@ADMIN_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZGU1Yzc0Ni05MGJmLTQ3MDUtYTI3Yi1iOWI3MDE2OTE3ZDUiLCJlbWFpbCI6Imhha2lteWFraW0yMDBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxNDQ2MjU1LCJleHAiOjE3NTE1MzI2NTV9.NmLhBHNiW0Sun5oCXCDH6J7h5hoXg2QkZUJivqPhM4M
 @AGENT_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MjMwM2Y4Ni02MDJkLTQ1NjMtYWJlOC05ZjBjYzJiODVkYWIiLCJlbWFpbCI6Imhha2dvdGNoaWxsc0BnbWFpbC5jb20iLCJyb2xlIjoiQUdFTlQiLCJpYXQiOjE3NTEwMjYyNzUsImV4cCI6MTc1MTExMjY3NX0.63HFchM2Lq-1NDIQWsai5u_FkSFkgzPCpbYQHpw5sZ0
-@CUSTOMER_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNTEyN2Q4Ny03ZWIzLTRlOWYtYjg4NC03NjljMWIxMmE3ZWEiLCJlbWFpbCI6Imp1c3RoYWtpbW1AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUxMDI2MzEyLCJleHAiOjE3NTExMTI3MTJ9.XBfiy6B5K1r40KKSfCvSdvZZjjoQduJXd_sf-UQ4tqY
-
+@CUSTOMER_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkMWI3YjVhZC0yMDNhLTRkMjItOWJkOC0wNmEzMTk3NzQ0YzMiLCJlbWFpbCI6Imp1c3RoYWtpbW1AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzUxNDQ2MjM2LCJleHAiOjE3NTE1MzI2MzZ9.h7JPIlYtY20TQZidIBViekvVdtAqmDyLjRdoWa6xiCY
 ### 👤 Get Logged-in User Profile (as Admin)
 GET http://localhost:3000/user/me
 Authorization: Bearer {{ADMIN_TOKEN}}
@@ -20,7 +19,7 @@ POST http://localhost:3000/auth/forgot-password
 Content-Type: application/json
 
 {
-  "email": "justhakimm@gmail.com"
+  "email": "hakimyakim200@gmail.com"
 }
 
 
@@ -63,7 +62,7 @@ Content-Type: application/json
 Authorization: Bearer {{CUSTOMER_TOKEN}}
 
 {
-  "vehicleId": "cb9db4ac-182a-4ace-bf24-86ceac5a4e38",
+  "vehicleId": "a70a32c1-1be7-4122-ac32-3ea780abf478",
   "rating": 5,
   "comment": "Amazing ride! Smooth and clean."
 }

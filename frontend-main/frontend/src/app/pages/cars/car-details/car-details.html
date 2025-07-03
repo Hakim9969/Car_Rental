@@ -1,0 +1,148 @@
+<section class="cars-section">
+  <header class="section-header">
+    <h2>Car Details</h2>
+    <p class="subtitle">Explore everything about this vehicle before booking</p>
+  </header>
+
+  <div class="detailsBooking">
+    <div class="content-wrapper">
+      <div *ngIf="loading" class="loading">Loading car details...</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+
+      <div *ngIf="car" class="car-grid">
+        <div class="car-card">
+          <!-- Image -->
+          <div class="car-image-container">
+            <img [src]="car.imageUrl || 'https://images.unsplash.com/photo-1549924231-f129b911e442?w=800&h=600&fit=crop&crop=center&auto=format&q=80'" 
+                 alt="{{ car.title }}" class="car-image" />
+          </div>
+
+          <!-- Details -->
+          <div class="car-details">
+            <h3 class="car-title">{{ car.title }}</h3>
+
+            <div class="form-row">
+              <div class="detail-row">
+                <span class="detail-label">Brand:</span>
+                <span class="detail-value">{{ car.brand }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Model:</span>
+                <span class="detail-value">{{ car.model }}</span>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="detail-row">
+                <span class="detail-label">Year:</span>
+                <span class="detail-value">{{ car.year }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Category:</span>
+                <span class="detail-value">{{ car.category }}</span>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="detail-row">
+                <span class="detail-label">Transmission:</span>
+                <span class="detail-value">{{ car.transmission }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Fuel Type:</span>
+                <span class="detail-value">{{ car.fuelType }}</span>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">{{ car.location }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Price/Day:</span>
+                <span class="detail-value">${{ car.pricePerDay }}</span>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="detail-row">
+                <span class="detail-label">Features:</span>
+                <span class="detail-value">{{ car.features }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Available:</span>
+                <span class="detail-value">{{ car.available ? 'Yes' : 'No' }}</span>
+              </div>
+            </div>
+            
+            <div class="detail-row full-width">
+              <span class="detail-label">Description:</span>
+              <span class="detail-value">{{ car.description }}</span>
+            </div>
+          </div>
+
+          <!-- Reviews -->
+          <div class="car-actions">
+            <h3>Reviews</h3>
+            <ul *ngIf="reviews.length > 0; else noReviews">
+              <li *ngFor="let review of reviews">
+                ⭐ {{ review.rating }} - "{{ review.comment }}"
+              </li>
+            </ul>
+            <ng-template #noReviews>
+              <p>No reviews yet.</p>
+            </ng-template>
+          </div>
+
+          <!-- Submit Review -->
+          <div *ngIf="role === 'CUSTOMER'" class="car-actions">
+            <h3>Leave a Review</h3>
+            <button *ngIf="!showReviewForm" class="info-button" (click)="showReviewForm = true">Write a Review</button>
+
+            <div *ngIf="showReviewForm" class="review-form-container">
+              <div class="form-group">
+                <label class="form-label">Rating:
+                  <select [(ngModel)]="rating" class="form-input">
+                    <option *ngFor="let r of [5, 4, 3, 2, 1]" [value]="r">{{ r }} ⭐</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Comment:
+                  <textarea [(ngModel)]="comment" class="form-input" rows="3" placeholder="Share your experience..."></textarea>
+                </label>
+              </div>
+              <button class="book-button" (click)="submitReview()">Submit</button>
+              <button class="cancel-button" (click)="showReviewForm = false">Cancel</button>
+              <p class="booking-message success" *ngIf="reviewMessage">{{ reviewMessage }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div *ngIf="role === 'CUSTOMER' && car?.available" class="booking-form-container">
+      <h3>Book this car</h3>
+      <div class="form-group">
+        <label class="form-label">Start Date:
+          <input type="date" class="form-input" [(ngModel)]="startDate" />
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="form-label">End Date:
+          <input type="date" class="form-input" [(ngModel)]="endDate" />
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Pickup Location:
+          <input type="text" class="form-input" [(ngModel)]="bookingLocation" placeholder="Enter pickup location" />
+        </label>
+      </div>
+      <button class="book-button" (click)="bookCar()">Book Now</button>
+      <p class="booking-message success" *ngIf="bookingMessage">{{ bookingMessage }}</p>
+      <p class="booking-message error" *ngIf="bookingError">{{ bookingError }}</p>
+    </div>
+  </div>
+</section>

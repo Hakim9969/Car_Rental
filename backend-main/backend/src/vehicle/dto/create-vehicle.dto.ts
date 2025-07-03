@@ -5,6 +5,7 @@ import {
   IsString,
   IsArray,
   ArrayNotEmpty,
+  IsNotEmpty,
 } from 'class-validator';
 
 export class CreateVehicleDto {
@@ -52,4 +53,8 @@ export class CreateVehicleDto {
   @IsOptional()
   @IsString()
   imageUrl?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  location: string; 
 }

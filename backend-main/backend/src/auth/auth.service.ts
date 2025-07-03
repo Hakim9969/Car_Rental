@@ -33,6 +33,17 @@ export class AuthService {
       data: { email, password: hashed, role, name, phone },
     });
 
+    await this.mailService.sendAdminOnUserRegister({
+       name: user.name,
+      email: user.email,
+      role: user.role,
+      phone: user.phone ?? undefined});
+
+      await this.mailService.sendWelcomeEmailToUser({
+  name: user.name,
+  email: user.email,
+});
+
     return this.signToken(user.id, user.email, user.role);
   }
 

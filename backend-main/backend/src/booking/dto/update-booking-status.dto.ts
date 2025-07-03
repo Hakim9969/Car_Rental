@@ -4,6 +4,7 @@ export enum BookingStatus {
   PENDING = 'PENDING',
   CONFIRMED = 'CONFIRMED',
   REJECTED = 'REJECTED',
+  COMPLETED = 'COMPLETED',
 }
 
 export class UpdateBookingStatusDto {

@@ -1,0 +1,109 @@
+<section class="bookings-section">
+  <header class="section-header">
+    <h2>Bookings</h2>
+  </header>
+
+  <div class="status-messages">
+    <div *ngIf="loading" class="loading-message">Loading...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </div>
+
+  <!-- Filter Section -->
+  <div *ngIf="role === 'ADMIN' || role === 'AGENT'" class="filter-section">
+    <div class="filter-form">
+      <h4 class="filter-title">Filter</h4>
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label class="filter-label">Status:
+            <select class="filter-select" [(ngModel)]="status">
+              <option value="">All</option>
+              <option>PENDING</option>
+              <option>CONFIRMED</option>
+              <option>CANCELLED</option>
+            </select>
+          </label>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Start Date: 
+            <input type="date" class="filter-input" [(ngModel)]="startDate" />
+          </label>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">End Date: 
+            <input type="date" class="filter-input" [(ngModel)]="endDate" />
+          </label>
+        </div>
+        
+        <button class="filter-button" (click)="applyFilter()">Apply Filter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Bookings Section -->
+  <div class="bookings-group">
+    <h3 class="bookings-subtitle">Active Bookings</h3>
+    
+    <div *ngIf="activeBookings.length === 0" class="no-bookings">
+      No active bookings.
+    </div>
+    
+    <ul class="bookings-list">
+      <li *ngFor="let b of activeBookings" class="booking-item">
+        <div class="booking-info">
+          <span class="booking-details">
+            {{ b.vehicle.title }} ({{ b.startDate | date }} - {{ b.endDate | date }}) - {{ b.status }}
+          </span>
+
+          <span class="booking-location"> - 📍 {{ b.vehicle.location }}</span>
+          
+          <span *ngIf="role === 'ADMIN' || role === 'AGENT'" class="user-info">
+            - {{ b.user?.name }} ({{ b.user?.email }})
+          </span>
+        </div>
+        
+        <div class="booking-actions">
+          <span *ngIf="role === 'CUSTOMER' && (b.status === 'PENDING' || b.status === 'CONFIRMED')">
+            <button class="action-button cancel-button" (click)="cancelBooking(b.id)">Cancel</button>
+          </span>
+          
+                  <!-- PENDING actions -->
+        <span *ngIf="(role === 'ADMIN' || role === 'AGENT') && b.status === 'PENDING'">
+           <button class="action-button confirm-button" (click)="updateBookingStatus(b.id, 'CONFIRMED')">Confirm</button>
+           <button class="action-button cancel-button" (click)="updateBookingStatus(b.id, 'CANCELLED')">Cancel</button>
+        </span>
+
+        <!-- COMPLETION option for confirmed bookings -->
+        <span *ngIf="(role === 'ADMIN' || role === 'AGENT') && b.status ===  'CONFIRMED'">
+          <button class="action-button complete-button" (click)="updateBookingStatus(b.id, 'COMPLETED')">Complete</button>
+        </span>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Past Bookings Section -->
+  <div class="bookings-group">
+    <h3 class="bookings-subtitle">Past Bookings</h3>
+    
+    <div *ngIf="pastBookings.length === 0" class="no-bookings">
+      No past bookings.
+    </div>
+    
+    <ul class="bookings-list">
+      <li *ngFor="let b of pastBookings" class="booking-item">
+        <div class="booking-info">
+          <span class="booking-details">
+            {{ b.vehicle.title }} ({{ b.startDate | date }} - {{ b.endDate | date }}) - {{ b.status }}
+          </span>
+          
+          <span *ngIf="role === 'ADMIN' || role === 'AGENT'" class="user-info">
+            - {{ b.user?.name }} ({{ b.user?.email }})
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

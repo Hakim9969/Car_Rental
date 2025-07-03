@@ -18,10 +18,10 @@ export class ReviewsService {
       where: {
         userId,
         vehicleId,
-        status: 'CONFIRMED', // Adjust this depending on your booking logic
-        endDate: {
-          lte: new Date(),
-        },
+        status: { in: ['COMPLETED'] },
+        // endDate: {
+        //   lte: new Date(),
+        // },
       },
     });
 

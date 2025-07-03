@@ -5,4 +5,7 @@ export class SystemStatsDto {
   customers: number;
   activeRentals: number;
   totalRevenue: number;
+  totalBookings: number;
+  totalVehicles: number;
+
 }

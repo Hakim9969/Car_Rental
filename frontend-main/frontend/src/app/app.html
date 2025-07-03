@@ -1,0 +1,95 @@
+<nav class="navbar">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+  <a routerLink="/cars" routerLinkActive="active">Cars</a>
+  <a *ngIf="isAuthenticated" routerLink="/bookings" routerLinkActive="active">Bookings</a>
+  <!-- ✅ Dashboard Link only if logged in -->
+  <a *ngIf="isAuthenticated" [routerLink]="'/dashboard/' + userRole?.toLowerCase()" routerLinkActive="active">Dashboard</a>
+
+  <!-- ✅ Login/Logout Button -->
+  <button *ngIf="!isAuthenticated" (click)="toggleLogin()" class="nav-button">Login</button>
+  <button *ngIf="isAuthenticated" (click)="confirmLogout()" class="nav-button">Logout</button>
+</nav>
+
+<!-- Router view -->
+<router-outlet></router-outlet>
+<!-- ✅ Register Modal -->
+<div class="modal-backdrop" *ngIf="showRegister">
+  <div class="modal-container register-container">
+    <button class="close-button" (click)="closeRegister()">×</button>
+    <h3>Register</h3>
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" [(ngModel)]="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required />
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+
+    <p>
+      Already have an account?
+      <a (click)="showLogin = true; showRegister = false">Sign In</a>
+    </p>
+
+    <p class="error-message" *ngIf="error">{{ error }}</p>
+  </div>
+</div>
+
+
+
+<!-- ✅ Login Modal -->
+<div class="modal-backdrop" *ngIf="showLogin">
+  <div class="modal-container register-container">
+    <button class="close-button" (click)="closeLogin()">×</button>
+    <h3>Login</h3>
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" name="email" [(ngModel)]="loginEmail" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="password" [(ngModel)]="loginPassword" required />
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <p>
+      Don't have an account?
+      <a (click)="showRegister = true; showLogin = false">Sign Up</a>
+    </p>
+    <p style="color:red" *ngIf="loginError">{{ loginError }}</p>
+  </div>
+
+</div>
+<div class="modal-backdrop" *ngIf="showLogoutConfirm">
+  <div class="modal-container">
+    <h3 style="margin-bottom: 1rem;">Confirm Logout</h3>
+    <p>Are you sure you want to logout?</p>
+    <div style="margin-top: 1.5rem; display: flex; justify-content: space-between;">
+      <button (click)="cancelLogout()" style="background-color: #0d70f1; color: #dfdee7;">Cancel</button>
+      <button (click)="logoutConfirmed()" style="background-color: #ef4444;">Logout</button>
+    </div>
+  </div>
+</div>
+
+

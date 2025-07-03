@@ -34,4 +34,13 @@ export class FilterVehicleDto {
   @IsOptional()
   @IsDateString()
   endDate?: string;
+
+  @IsOptional()
+  @IsString()
+  search?: string;
+
+   @IsOptional()
+  @IsString()
+  location?: string;
+
 }

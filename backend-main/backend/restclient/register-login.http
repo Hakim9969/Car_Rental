@@ -25,9 +25,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-  "email": "hakgotchills@gmail.com",
-  "name": "Hakim Yakim",
-  "phone": "+254745115058",
+  "email": "Abdul@gmail.com",
+  "name": "Abdul",
+  "phone": "+254715328260",
   "password": "hakim200",
   "confirmPassword": "hakim200",
   "role": "AGENT"
@@ -47,9 +47,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-  "email": "justhakimm@gmail.com",
-  "name": "Riadh Ahmed",
-  "phone": "+254745115051",
+  "email": "hakim@gmail.com",
+  "name": "hakim Ahmed",
+  "phone": "+254745115057",
   "password": "hakim200",
   "confirmPassword": "hakim200",
   "role": "CUSTOMER"

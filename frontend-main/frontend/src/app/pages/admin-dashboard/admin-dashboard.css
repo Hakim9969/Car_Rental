@@ -1,0 +1,175 @@
+/* Main Container Styles */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('../../../assets/cardark.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay; /* Allows the gradient and image to blend */
+  color: #1e293b;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 2rem;
+}
+
+
+/* Animated Background Overlay */
+.dashboard-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%);
+  opacity: 0.3;
+  animation: pulse 15s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* Dark Mode Variant */
+.dashboard-container.dark {
+  background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 50%, #6b21a8 100%);
+  color: #e2e8f0;
+}
+
+/* Header Styles */
+.dashboard-container h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #ffffff, #d1d5db);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-out;
+  text-align: center;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button Container Styles */
+.dashboard-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.dashboard-buttons:hover {
+  transform: scale(1.02);
+}
+
+/* Individual Button Styles */
+.dashboard-buttons button {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  background: #4f46e5;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  min-width: 180px;
+}
+
+/* Button Hover Effects */
+.dashboard-buttons button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.dashboard-buttons button:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+.dashboard-buttons button:hover {
+  background: #4338ca;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Focus State */
+.dashboard-buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+  z-index: 1;
+}
+
+/* Button Animations */
+.dashboard-buttons button:nth-child(1) { animation: slideIn 0.5s ease-out 0.1s both; }
+.dashboard-buttons button:nth-child(2) { animation: slideIn 0.5s ease-out 0.2s both; }
+.dashboard-buttons button:nth-child(3) { animation: slideIn 0.5s ease-out 0.3s both; }
+.dashboard-buttons button:nth-child(4) { animation: slideIn 0.5s ease-out 0.4s both; }
+.dashboard-buttons button:nth-child(5) { animation: slideIn 0.5s ease-out 0.5s both; }
+.dashboard-buttons button:nth-child(6) { animation: slideIn 0.5s ease-out 0.6s both; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dashboard-buttons {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  
+  .dashboard-buttons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .dashboard-container h2 {
+    font-size: 1.75rem;
+  }
+}

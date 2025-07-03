@@ -1,0 +1,129 @@
+<section class="search-section">
+  <header class="section-header">
+    <h2>Welcome to FancyRides</h2>
+    <p class="subtitle">Search cars by location and availability</p>
+  </header>
+
+  <form (ngSubmit)="filterVehicles()" class="search-container">
+    <div class="form-group">
+      <label class="form-label">Location:</label>
+      <select [(ngModel)]="filters.location" name="location" class="form-input" required>
+        <option value="" disabled selected>Select location</option>
+        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Start Date:</label>
+      <input type="date" [(ngModel)]="filters.startDate" name="startDate" class="form-input" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">End Date:</label>
+      <input type="date" [(ngModel)]="filters.endDate" name="endDate" class="form-input" required />
+    </div>
+
+    <button type="submit" class="book-button">Search</button>
+  </form>
+</section>
+
+
+<section class="vehicle-results" *ngIf="vehicles.length > 0">
+  <header class="section-header">
+    <h3>Available Vehicles</h3>
+    <p class="subtitle">Select from cars matching your search criteria</p>
+  </header>
+
+  <div class="car-grid">
+    <div class="car-card" *ngFor="let car of vehicles">
+      <!-- Price badge positioned at top -->
+      <div class="price-badge">
+        <span class="price-text">${{ car.pricePerDay }}/day</span>
+      </div>
+      
+      <div class="car-image-container">
+        <img 
+          [src]="car.imageUrl || 'https://via.placeholder.com/300'" 
+          [alt]="car.title" 
+          class="car-image"
+          (click)="onCarClick(car.id)"
+        />
+      </div>
+
+      <div class="car-details">
+        <h4 class="car-title">{{ car.title }}</h4>
+
+        <div class="detail-row">
+          <span class="detail-label">Brand:</span>
+          <span class="detail-value">{{ car.brand }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Location:</span>
+          <span class="detail-value">{{ car.location }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Model:</span>
+          <span class="detail-value">{{ car.model }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="vehicles.length === 0 && searchAttempted" class="no-results">
+  <p>No vehicles available for the selected location and dates.</p>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <div class="footer-brand">
+        <h3 class="footer-logo">FancyRides</h3>
+        <p class="footer-tagline">Premium car rentals for every journey</p>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <h4 class="footer-title">Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link">Home</a></li>
+        <li><a href="#" class="footer-link">Fleet</a></li>
+        <li><a href="#" class="footer-link">Locations</a></li>
+        <li><a href="#" class="footer-link">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4 class="footer-title">Services</h4>
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link">Luxury Cars</a></li>
+        <li><a href="#" class="footer-link">Economy Cars</a></li>
+        <li><a href="#" class="footer-link">Long-term Rentals</a></li>
+        <li><a href="#" class="footer-link">Corporate</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4 class="footer-title">Contact</h4>
+      <div class="footer-contact">
+        <p class="contact-item">📧 info&#64;fancyrides.com</p>
+        <p class="contact-item">📞 +254 745115061</p>
+        <p class="contact-item">📍 Nairobi</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p class="copyright">© 2025 FancyRides. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#" class="legal-link">Privacy Policy</a>
+        <a href="#" class="legal-link">Terms of Service</a>
+        <a href="#" class="legal-link">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
